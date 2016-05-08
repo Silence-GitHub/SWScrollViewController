@@ -2,11 +2,15 @@
 //  AppDelegate.m
 //  SWScrollViewController
 //
-//  Created by 陆凯波 on 16/5/5.
+//  Created by Kaibo Lu on 16/5/5.
 //  Copyright © 2016年 Kaibo Lu. All rights reserved.
 //
 
 #import "AppDelegate.h"
+
+#import "SWScrollViewController.h"
+#import "ViewController.h"
+#import "ViewController1.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +20,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    ViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"View controller"];
+    ViewController1 *vc1 = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"View controller 1"];
+    
+    SWScrollViewController *scrollVC = [[SWScrollViewController alloc] initWithControllers:@[vc, vc1]];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = scrollVC;
+    
     return YES;
 }
 
