@@ -6,27 +6,27 @@ A container view controller with scroll view. It changes content view controller
 
 ### Select content view controller with title button
 
-![](/Users/Kaibo/Program/iOS/SWScrollViewController/README_resources/Select_content_view_controller_with_title_button.gif "Select_content_view_controller_with_title_button")
+![](README_resources/Select_content_view_controller_with_title_button.gif "Select_content_view_controller_with_title_button")
 
-![](/Users/Kaibo/Program/iOS/SWScrollViewController/README_resources/Select_content_view_controller_with_title_button_2.gif "Select_content_view_controller_with_title_button_2")
+![](README_resources/Select_content_view_controller_with_title_button_2.gif "Select_content_view_controller_with_title_button_2")
 
 ### Select content view controller with panning gesture
 
-![](/Users/Kaibo/Program/iOS/SWScrollViewController/README_resources/Select_content_view_controller_with_panning_gesture.gif "Select_content_view_controller_with_panning_gesture")
+![](README_resources/Select_content_view_controller_with_panning_gesture.gif "Select_content_view_controller_with_panning_gesture")
 
 ### Select content view controller programmatically
 
-![](/Users/Kaibo/Program/iOS/SWScrollViewController/README_resources/Select_content_view_controller_programmatically.gif "Select_content_view_controller_programmatically")
+![](README_resources/Select_content_view_controller_programmatically.gif "Select_content_view_controller_programmatically")
 
-![](/Users/Kaibo/Program/iOS/SWScrollViewController/README_resources/Select_content_view_controller_programmatically_2.gif "Select_content_view_controller_programmatically_2")
+![](README_resources/Select_content_view_controller_programmatically_2.gif "Select_content_view_controller_programmatically_2")
 
 ### Set content view controllers
 
-![](/Users/Kaibo/Program/iOS/SWScrollViewController/README_resources/Set_content_view_controllers.gif "Set_content_view_controllers")
+![](README_resources/Set_content_view_controllers.gif "Set_content_view_controllers")
 
 ### Hide or show titles
 
-![](/Users/Kaibo/Program/iOS/SWScrollViewController/README_resources/Hide_or_show_titles.gif "Hide_or_show_titles")
+![](README_resources/Hide_or_show_titles.gif "Hide_or_show_titles")
 
 
 
@@ -66,7 +66,7 @@ It will change content view frame, not just set hidden property of title scroll 
 // Hide titles
 [scrollVC hideTitleScrollView:YES];
 // Show titles
-[scrollVC hideTitleScrollView:YES];
+[scrollVC hideTitleScrollView:NO];
 ```
     
 ### Get content scroll view displaying views of child view controllers
@@ -76,7 +76,7 @@ UIScrollView *contentScrollView = scrollVC.contentScrollView;
 // Do something to the content scroll view
 ```
     
-### Get content view controller whose view is on visible rect
+### Get content view controller whose view is in visible rect
 
 ```
 UIViewController *contentVC = scrollVC.contentViewController;
@@ -88,7 +88,7 @@ UIViewController *contentVC = scrollVC.contentViewController;
 UIView *contentView = scrollVC.contentView;
 ```
     
-### Get selected index of child view controller
+### Get selected index indicating the selected child view controller (content view controller)
 
 ```
 NSUInteger selectedIndex = scrollVC.selectedIndex;
