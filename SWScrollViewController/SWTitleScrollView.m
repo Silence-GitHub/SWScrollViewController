@@ -21,6 +21,8 @@ const static CGFloat MARK_LINE_HEIGHT = 1.0f;
             x += button.bounds.size.width + BUTTONS_SPACE;
         }
         _titleButtons = buttons;
+        
+        self.scrollsToTop = NO;
     }
     return self;
 }
@@ -53,9 +55,19 @@ const static CGFloat MARK_LINE_HEIGHT = 1.0f;
 }
 
 - (void)updateContentSize {
-    CGFloat width = CGRectGetMaxX(_titleButtons.lastObject.frame) + BUTTONS_SPACE * 0.5f;
-    CGFloat height = CGRectGetMaxY(_markLine.frame);
-    self.contentSize = CGSizeMake(width, height);
+    CGRect lastButtonFrame = _titleButtons.lastObject.frame;
+    CGFloat markLine_height = CGRectGetHeight(_markLine.frame);
+    CGFloat content_width = CGRectGetMaxX(lastButtonFrame) + BUTTONS_SPACE * 0.5f;
+    CGFloat content_height = CGRectGetHeight(lastButtonFrame) + markLine_height;
+    self.contentSize = CGSizeMake(content_width, content_height);
+    
+    // Update mark line frame
+    // Mark line always in the bottom
+    CGFloat markLine_x = _markLine.frame.origin.x;
+    CGFloat markLine_y = content_height - markLine_height;
+    CGFloat markLine_width = _markLine.frame.size.width;
+    
+    _markLine.frame = CGRectMake(markLine_x, markLine_y, markLine_width, markLine_height);
 }
 
 @end

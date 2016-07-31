@@ -38,6 +38,7 @@
         _contentScrollView.delegate = self;
         _contentScrollView.bounces = NO;
         _contentScrollView.showsHorizontalScrollIndicator = NO;
+        _contentScrollView.scrollsToTop = NO;
         [self.view addSubview:_contentScrollView];
     }
     return _contentScrollView;
@@ -100,6 +101,16 @@
 
 #pragma mark - View controller life cycle
 
+- (instancetype)init {
+    // Init
+    self = [super init];
+    if (self) {
+        _shouldHideTitleScrollView = NO;
+        _selectedIndex = 0;
+    }
+    return self;
+}
+
 - (instancetype)initWithControllers:(NSArray <__kindof UIViewController *> *)controllers {
     
     if (![self checkControllers:controllers]) {
@@ -137,12 +148,16 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     
-    if (!_shouldHideTitleScrollView) {
-        // Show title scroll view
+    [self displayViewControllers];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (!_shouldHideTitleScrollView && !_titleScrollView) {
+        // Show title scroll view if needed
         [self setupTitleScrollView];
     }
-    
-    [self displayViewControllers];
 }
 
 - (void)setupTitleScrollView {
@@ -197,6 +212,9 @@
 
 - (void)viewWillLayoutSubviews {
     
+    // Update title scroll view content size
+    [_titleScrollView updateContentSize];
+    
     CGFloat contentView_width = self.view.bounds.size.width;
     
     // Update title scroll view frame
@@ -221,9 +239,6 @@
     // Update mark line frame
     self.markLine.frame = CGRectMake((maxWidth + BUTTONS_SPACE) * _selectedIndex, CGRectGetMinY(self.markLine.frame), maxWidth + BUTTONS_SPACE, CGRectGetHeight(self.markLine.frame));
     [self.titleScrollView scrollRectToVisible:self.markLine.frame animated:NO];
-    
-    // Update title scroll view content size
-    [_titleScrollView updateContentSize];
     
     // Update content scoll view frame
     CGFloat contentView_y = [self contentScrollViewY];

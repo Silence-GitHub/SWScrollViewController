@@ -24,10 +24,17 @@
     ViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"View controller"];
     ViewController1 *vc1 = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"View controller 1"];
     
-    SWScrollViewController *scrollVC = [[SWScrollViewController alloc] initWithControllers:@[vc, vc1]];
+    SWScrollViewController *scrollVC = [[SWScrollViewController alloc] init];
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:scrollVC];
+    UITabBarController *tc = [[UITabBarController alloc] init];
+    tc.viewControllers = @[nc];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = scrollVC;
+    self.window.rootViewController = tc;
+//    [self.window makeKeyAndVisible];
+    
+    scrollVC.viewControllers = @[vc, vc1];
+    scrollVC.selectedIndex = 1;
     
     return YES;
 }
