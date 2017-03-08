@@ -107,6 +107,7 @@
     if (self) {
         _shouldHideTitleScrollView = NO;
         _selectedIndex = 0;
+        _minEndDraggingVelocity = 2;
     }
     return self;
 }
@@ -123,6 +124,7 @@
         _shouldHideTitleScrollView = NO;
         _viewControllers = controllers;
         _selectedIndex = 0;
+        _minEndDraggingVelocity = 2;
     }
     return self;
 }
@@ -352,7 +354,13 @@
             // Move right
             ++_selectedIndex;
         }
-        targetContentOffset->x = _selectedIndex * contentView_width;
+        if (ABS(velocity.x) >= _minEndDraggingVelocity) {
+            targetContentOffset->x = _selectedIndex * contentView_width;
+        } else {
+            // Too slow
+            targetContentOffset->x = scrollView.contentOffset.x; // Stop
+            [scrollView setContentOffset:CGPointMake(_selectedIndex * contentView_width, scrollView.contentOffset.y) animated:true]; // Animate to destination with default velocity
+        }
     }
 }
 

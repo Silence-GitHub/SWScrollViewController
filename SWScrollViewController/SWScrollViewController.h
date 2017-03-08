@@ -21,6 +21,7 @@
 @property (nonatomic) NSUInteger selectedIndex;
 @property (nonatomic, strong, readonly) UIViewController *contentViewController; // view controller displaying content
 @property (nonatomic, strong, readonly) UIView *contentView; // for content view controller
+@property (nonatomic) CGFloat minEndDraggingVelocity;
 
 - (instancetype)initWithControllers:(NSArray <__kindof UIViewController *> *)controllers;
 
